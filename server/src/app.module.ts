@@ -3,6 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppResolver } from './app.resolver';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { CatsModule } from './cats/cats.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
+    CatsModule,
   ],
   providers: [AppResolver],
 })
