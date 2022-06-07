@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { AppResolver } from './app.resolver';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { CatsModule } from './cats/cats.module';
 import { ConfigModule } from '@nestjs/config';
@@ -26,6 +25,6 @@ import { DatabaseConfigService } from './config/database.config';
     }),
     CatsModule,
   ],
-  providers: [AppResolver],
+  providers: [],
 })
 export class AppModule {}

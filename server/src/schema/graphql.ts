@@ -11,22 +11,12 @@ export class CreateCatInput {
   age?: Nullable<number>;
 }
 
-export class PersonInput {
-  id?: Nullable<number>;
-  email?: Nullable<string>;
-  name?: Nullable<string>;
-}
-
 export abstract class IQuery {
   abstract cats():
     | Nullable<Nullable<Cat>[]>
     | Promise<Nullable<Nullable<Cat>[]>>;
 
   abstract cat(id: string): Nullable<Cat> | Promise<Nullable<Cat>>;
-
-  abstract helloWorld(): Nullable<string> | Promise<Nullable<string>>;
-
-  abstract getPerson(): Nullable<Person> | Promise<Nullable<Person>>;
 }
 
 export abstract class IMutation {
@@ -47,12 +37,6 @@ export class Cat {
   name?: Nullable<string>;
   age?: Nullable<number>;
   owner?: Nullable<Owner>;
-}
-
-export class Person {
-  id?: Nullable<number>;
-  email?: Nullable<string>;
-  name?: Nullable<string>;
 }
 
 type Nullable<T> = T | null;
