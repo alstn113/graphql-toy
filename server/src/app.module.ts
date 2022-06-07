@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { CatsModule } from './cats/cats.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfigService } from './config/database.config';
+import { PostModule } from './post/post.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -23,8 +24,8 @@ import { DatabaseConfigService } from './config/database.config';
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
-    CatsModule,
+    PostModule,
+    CommentModule,
   ],
-  providers: [],
 })
 export class AppModule {}

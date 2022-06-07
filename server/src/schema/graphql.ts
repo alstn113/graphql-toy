@@ -1,3 +1,4 @@
+
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -6,37 +7,40 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export class CreateCatInput {
-  name?: Nullable<string>;
-  age?: Nullable<number>;
+export class CreateCommentInput {
+    text: string;
+}
+
+export class CreatePostInput {
+    title: string;
+    body: string;
+}
+
+export class Comment {
+    id: string;
+    text: string;
 }
 
 export abstract class IQuery {
-  abstract cats():
-    | Nullable<Nullable<Cat>[]>
-    | Promise<Nullable<Nullable<Cat>[]>>;
+    abstract comments(): Nullable<Comment>[] | Promise<Nullable<Comment>[]>;
 
-  abstract cat(id: string): Nullable<Cat> | Promise<Nullable<Cat>>;
+    abstract comment(id: string): Nullable<Post> | Promise<Nullable<Post>>;
+
+    abstract posts(): Nullable<Post>[] | Promise<Nullable<Post>[]>;
+
+    abstract post(id: string): Nullable<Post> | Promise<Nullable<Post>>;
 }
 
 export abstract class IMutation {
-  abstract createCat(
-    createCatInput?: Nullable<CreateCatInput>,
-  ): Nullable<Cat> | Promise<Nullable<Cat>>;
+    abstract createComment(createCommentInput?: Nullable<CreateCommentInput>): Nullable<Comment> | Promise<Nullable<Comment>>;
+
+    abstract createPost(createPostInput?: Nullable<CreatePostInput>): Nullable<Post> | Promise<Nullable<Post>>;
 }
 
-export class Owner {
-  id: number;
-  name: string;
-  age?: Nullable<number>;
-  cats?: Nullable<Cat[]>;
-}
-
-export class Cat {
-  id?: Nullable<number>;
-  name?: Nullable<string>;
-  age?: Nullable<number>;
-  owner?: Nullable<Owner>;
+export class Post {
+    id: string;
+    title: string;
+    body: string;
 }
 
 type Nullable<T> = T | null;

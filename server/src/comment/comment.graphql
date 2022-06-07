@@ -1,0 +1,17 @@
+type Comment {
+  id: ID!
+  text: String!
+}
+
+input CreateCommentInput {
+  text: String!
+}
+
+type Query {
+  comments: [Comment]!
+  comment(id: String!): Post
+}
+
+type Mutation {
+  createComment(createCommentInput: CreateCommentInput): Comment
+}
