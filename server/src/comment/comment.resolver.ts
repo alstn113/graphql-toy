@@ -2,14 +2,10 @@ import { Args, Resolver } from '@nestjs/graphql';
 import { CommentService } from './comment.service';
 import { Query, Mutation } from '@nestjs/graphql';
 import { CreateCommentInput } from 'src/schema/graphql';
-import { PostService } from 'src/post/post.service';
 
 @Resolver('Comment')
 export class CommentResolver {
-  constructor(
-    private readonly postService: PostService,
-    private readonly commentService: CommentService,
-  ) {}
+  constructor(private readonly commentService: CommentService) {}
 
   @Query('comments')
   async getComments() {

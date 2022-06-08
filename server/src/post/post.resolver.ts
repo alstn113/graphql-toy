@@ -1,10 +1,21 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CreatePostInput } from 'src/schema/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { CommentService } from 'src/comment/comment.service';
+import { CreatePostInput, Post } from 'src/schema/graphql';
 import { PostService } from './post.service';
 
 @Resolver('Post')
 export class PostResolver {
-  constructor(private readonly postService: PostService) {}
+  constructor(
+    private readonly postService: PostService,
+    private readonly commentService: CommentService,
+  ) {}
 
   @Query('posts')
   async getPosts() {
@@ -25,5 +36,10 @@ export class PostResolver {
   @Mutation('removePost')
   async removePost(@Args('id') id: string) {
     return await this.postService.remove(id);
+  }
+
+  @ResolveField()
+  async comments(@Parent() post: Post) {
+    return this.commentService.findAllById(post.id);
   }
 }

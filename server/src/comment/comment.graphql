@@ -11,7 +11,7 @@ input CreateCommentInput {
 }
 
 type Query {
-  comments: [Comment]!
+  comments: [Comment]
   comment(id: String!): Post
 }
 

@@ -19,6 +19,10 @@ export class CommentService {
     return await this.commentRepostory.findOneByOrFail({ id });
   }
 
+  async findAllById(postId: string) {
+    return await this.commentRepostory.find({ where: { fk_post_id: postId } });
+  }
+
   async create(dto: CreateCommentInput) {
     const comment = new Comment();
     comment.text = dto.text;
