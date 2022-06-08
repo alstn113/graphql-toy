@@ -1,0 +1,14 @@
+{
+  "name": "graphql-toy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/neko113/graphql-toy.git",
+  "author": "neko113 <alstn113@gmail.com>",
+  "scripts": {
+    "start": "concurrently \"cd server && yarn start:dev\" \"cd client && yarn dev\""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^7.2.1"
+  }
+}
