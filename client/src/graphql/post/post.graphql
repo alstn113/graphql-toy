@@ -1,0 +1,11 @@
+query Posts {
+  posts {
+    id
+    title
+    body
+    comments {
+      id
+      text
+    }
+  }
+}
