@@ -1,4 +1,3 @@
-
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -8,41 +7,53 @@
 /* tslint:disable */
 /* eslint-disable */
 export class CreateCommentInput {
-    text: string;
+  text: string;
+  fk_post_id: string;
 }
 
 export class CreatePostInput {
-    title: string;
-    body: string;
+  title: string;
+  body: string;
 }
 
 export class Comment {
-    id: string;
-    text: string;
+  id: string;
+  text: string;
+  fk_post_id: string;
+  post: Post;
 }
 
 export abstract class IQuery {
-    abstract comments(): Nullable<Comment>[] | Promise<Nullable<Comment>[]>;
+  abstract comments(): Nullable<Comment>[] | Promise<Nullable<Comment>[]>;
 
-    abstract comment(id: string): Nullable<Post> | Promise<Nullable<Post>>;
+  abstract comment(id: string): Nullable<Post> | Promise<Nullable<Post>>;
 
-    abstract posts(): Nullable<Post>[] | Promise<Nullable<Post>[]>;
+  abstract posts(): Nullable<Post>[] | Promise<Nullable<Post>[]>;
 
-    abstract post(id: string): Nullable<Post> | Promise<Nullable<Post>>;
+  abstract post(id: string): Nullable<Post> | Promise<Nullable<Post>>;
 }
 
 export abstract class IMutation {
-    abstract createComment(createCommentInput?: Nullable<CreateCommentInput>): Nullable<Comment> | Promise<Nullable<Comment>>;
+  abstract createComment(
+    createCommentInput?: Nullable<CreateCommentInput>,
+  ): Nullable<Comment> | Promise<Nullable<Comment>>;
 
-    abstract createPost(createPostInput?: Nullable<CreatePostInput>): Nullable<Post> | Promise<Nullable<Post>>;
+  abstract removeComment(
+    id: string,
+  ): Nullable<string> | Promise<Nullable<string>>;
 
-    abstract removePost(id: string): Nullable<string> | Promise<Nullable<string>>;
+  abstract createPost(
+    createPostInput?: Nullable<CreatePostInput>,
+  ): Nullable<Post> | Promise<Nullable<Post>>;
+
+  abstract removePost(id: string): Nullable<string> | Promise<Nullable<string>>;
 }
 
 export class Post {
-    id: string;
-    title: string;
-    body: string;
+  id: string;
+  title: string;
+  body: string;
+  comments?: Nullable<Comment[]>;
 }
 
 type Nullable<T> = T | null;

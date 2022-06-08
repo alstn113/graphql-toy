@@ -1,10 +1,13 @@
 type Comment {
   id: ID!
   text: String!
+  fk_post_id: String!
+  post: Post!
 }
 
 input CreateCommentInput {
   text: String!
+  fk_post_id: String!
 }
 
 type Query {

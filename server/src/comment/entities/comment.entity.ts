@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Post } from 'src/post/entities/post.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Comment {
@@ -7,4 +14,13 @@ export class Comment {
 
   @Column()
   text: string;
+
+  @Column()
+  fk_post_id: string;
+
+  @ManyToOne(() => Post, post => post.comments, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'fk_post_id' })
+  post: Post;
 }

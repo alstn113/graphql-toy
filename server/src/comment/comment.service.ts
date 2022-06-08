@@ -22,6 +22,7 @@ export class CommentService {
   async create(dto: CreateCommentInput) {
     const comment = new Comment();
     comment.text = dto.text;
+    comment.fk_post_id = dto.fk_post_id;
     return await this.commentRepostory.save(comment);
   }
 
