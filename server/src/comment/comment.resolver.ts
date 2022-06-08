@@ -21,4 +21,9 @@ export class CommentResolver {
     const createdComment = await this.commentService.create(args);
     return createdComment;
   }
+
+  @Mutation('removeComment')
+  async removeComment(@Args('id') id: string) {
+    return await this.commentService.remove(id);
+  }
 }

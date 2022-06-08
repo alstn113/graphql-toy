@@ -21,4 +21,9 @@ export class PostResolver {
     const createdPost = await this.postService.create(args);
     return createdPost;
   }
+
+  @Mutation('removePost')
+  async removePost(@Args('id') id: string) {
+    return await this.postService.remove(id);
+  }
 }

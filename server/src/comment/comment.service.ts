@@ -24,4 +24,10 @@ export class CommentService {
     comment.text = dto.text;
     return await this.commentRepostory.save(comment);
   }
+
+  async remove(id: string) {
+    const comment = await this.commentRepostory.findOneByOrFail({ id });
+    await this.commentRepostory.remove(comment);
+    return `Comment id { ${id} } was removed`;
+  }
 }

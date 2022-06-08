@@ -25,4 +25,10 @@ export class PostService {
     post.body = dto.body;
     return await this.postRepostory.save(post);
   }
+
+  async remove(id: string) {
+    const post = await this.postRepostory.findOneByOrFail({ id });
+    await this.postRepostory.remove(post);
+    return `Post id { ${id} } was removed`;
+  }
 }
