@@ -1,11 +1,15 @@
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+import { GraphQLClient } from 'graphql-request';
+import { RequestInit } from 'graphql-request/dist/types.dom';
+import { useQuery, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions = {} as const;
+
+function fetcher<TData, TVariables>(client: GraphQLClient, query: string, variables?: TVariables, headers?: RequestInit['headers']) {
+  return async (): Promise<TData> => client.request<TData, TVariables>(query, variables, headers);
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -87,14 +91,14 @@ export type QueryPostArgs = {
   id: Scalars['String'];
 };
 
-export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetAllPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PostsQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Post', id: string, title: string, body: string, comments?: Array<{ __typename?: 'Comment', id: string, text: string } | null> | null } | null> | null };
+export type GetAllPostsQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Post', id: string, title: string, body: string, comments?: Array<{ __typename?: 'Comment', id: string, text: string } | null> | null } | null> | null };
 
 
-export const PostsDocument = gql`
-    query Posts {
+export const GetAllPostsDocument = `
+    query GetAllPosts {
   posts {
     id
     title
@@ -106,30 +110,17 @@ export const PostsDocument = gql`
   }
 }
     `;
-
-/**
- * __usePostsQuery__
- *
- * To run a query within a React component, call `usePostsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePostsQuery({
- *   variables: {
- *   },
- * });
- */
-export function usePostsQuery(baseOptions?: Apollo.QueryHookOptions<PostsQuery, PostsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PostsQuery, PostsQueryVariables>(PostsDocument, options);
-      }
-export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsQuery, PostsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PostsQuery, PostsQueryVariables>(PostsDocument, options);
-        }
-export type PostsQueryHookResult = ReturnType<typeof usePostsQuery>;
-export type PostsLazyQueryHookResult = ReturnType<typeof usePostsLazyQuery>;
-export type PostsQueryResult = Apollo.QueryResult<PostsQuery, PostsQueryVariables>;
+export const useGetAllPostsQuery = <
+      TData = GetAllPostsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetAllPostsQueryVariables,
+      options?: UseQueryOptions<GetAllPostsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllPostsQuery, TError, TData>(
+      variables === undefined ? ['GetAllPosts'] : ['GetAllPosts', variables],
+      fetcher<GetAllPostsQuery, GetAllPostsQueryVariables>(client, GetAllPostsDocument, variables, headers),
+      options
+    );

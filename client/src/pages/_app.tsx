@@ -1,11 +1,15 @@
 import type { AppProps } from 'next/app';
-import ServerApolloProvider from '../graphql/apollo';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient();
+
   return (
-    <ServerApolloProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={true} />
       <Component {...pageProps} />
-    </ServerApolloProvider>
+    </QueryClientProvider>
   );
 }
 
