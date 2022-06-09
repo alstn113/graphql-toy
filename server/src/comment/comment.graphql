@@ -12,7 +12,7 @@ input CreateCommentInput {
 
 type Query {
   comments: [Comment]
-  comment(id: String!): Post
+  comment(id: String!): Comment
 }
 
 type Mutation {
