@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import { GetAllPostsQuery, useGetAllPostsQuery } from '../generated/graphql';
 import graphqlRequestClient from '../lib/client/graphqlRequestClient';
 
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
       {data?.posts?.map(post => {
         return (
           <div key={post?.id}>
-            <div>{post?.id}</div>
+            <Link href={`/detail/${post?.id}`}>{post?.id}</Link>
             <div>{post?.title}</div>
             <div>{post?.body}</div>
             <div>
