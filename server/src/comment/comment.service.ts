@@ -1,38 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreateCommentInput } from 'src/schema/graphql';
-import { Repository } from 'typeorm';
-import { Comment } from './entities/comment.entity';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class CommentService {
-  constructor(
-    @InjectRepository(Comment)
-    private readonly commentRepostory: Repository<Comment>,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  async findAll() {
-    return await this.commentRepostory.find();
+  findAll() {
+    return this.prisma.comment.findMany();
   }
 
-  async findById(id: string) {
-    return await this.commentRepostory.findOneByOrFail({ id });
+  findById(commentWhereUniqueInput: Prisma.CommentWhereUniqueInput) {
+    return this.prisma.comment.findUnique({
+      where: commentWhereUniqueInput,
+    });
   }
 
-  async findAllById(postId: string) {
-    return await this.commentRepostory.find({ where: { fk_post_id: postId } });
+  findAllById(postId: string) {
+    return;
   }
 
-  async create(dto: CreateCommentInput) {
-    const comment = new Comment();
-    comment.text = dto.text;
-    comment.fk_post_id = dto.fk_post_id;
-    return await this.commentRepostory.save(comment);
+  create(createCommentInput: Prisma.CommentCreateInput) {
+    return this.prisma.comment.create({
+      data: createCommentInput,
+    });
   }
 
-  async remove(id: string) {
-    const comment = await this.commentRepostory.findOneByOrFail({ id });
-    await this.commentRepostory.remove(comment);
-    return `Comment id { ${id} } was removed`;
+  remove(id: string) {
+    return;
   }
 }

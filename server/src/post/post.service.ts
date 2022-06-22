@@ -1,34 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreatePostInput } from 'src/schema/graphql';
-import { Repository } from 'typeorm';
-import { Post } from './entities/post.entity';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class PostService {
-  constructor(
-    @InjectRepository(Post)
-    private readonly postRepostory: Repository<Post>,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  async findAll() {
-    return await this.postRepostory.find();
+  findAll() {
+    return this.prisma.post.findMany();
   }
 
-  async findById(id: string) {
-    return await this.postRepostory.findOneByOrFail({ id });
+  findById(postWhereUniqueInput: Prisma.PostWhereUniqueInput) {
+    return this.prisma.post.findUnique({
+      where: postWhereUniqueInput,
+    });
   }
 
-  async create(dto: CreatePostInput) {
-    const post = new Post();
-    post.title = dto.title;
-    post.body = dto.body;
-    return await this.postRepostory.save(post);
+  create(createPostInput: Prisma.PostCreateInput) {
+    return this.prisma.post.create({
+      data: createPostInput,
+    });
   }
 
-  async remove(id: string) {
-    const post = await this.postRepostory.findOneByOrFail({ id });
-    await this.postRepostory.remove(post);
-    return `Post id { ${id} } was removed`;
+  remove(id: string) {
+    return;
   }
 }

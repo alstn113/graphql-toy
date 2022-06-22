@@ -6,6 +6,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { CommentService } from 'src/comment/comment.service';
 import { CreatePostInput, Post } from 'src/schema/graphql';
 import { PostService } from './post.service';
@@ -18,28 +19,27 @@ export class PostResolver {
   ) {}
 
   @Query('posts')
-  async getPosts() {
-    return await this.postService.findAll();
+  getPosts() {
+    return this.postService.findAll();
   }
 
   @Query('post')
-  async getPost(@Args('id') id: string) {
-    return await this.postService.findById(id);
+  getPost(@Args('id') id: string) {
+    return this.postService.findById({ id });
   }
 
   @Mutation('createPost')
-  async createPost(@Args('createPostInput') args: CreatePostInput) {
-    const createdPost = await this.postService.create(args);
-    return createdPost;
+  createPost(@Args('createPostInput') args: Prisma.PostCreateInput) {
+    return this.postService.create(args);
   }
 
   @Mutation('removePost')
-  async removePost(@Args('id') id: string) {
-    return await this.postService.remove(id);
+  removePost(@Args('id') id: string) {
+    // return await this.postService.remove(id);
   }
 
   @ResolveField()
-  async comments(@Parent() post: Post) {
-    return this.commentService.findAllById(post.id);
+  comments(@Parent() post: Post) {
+    // return this.commentService.findAllById(post.id);
   }
 }
