@@ -1,8 +1,11 @@
+scalar DateTime
+
 type Post {
   id: ID!
   title: String!
   body: String!
   comments: [Comment]
+  createdAt: DateTime
 }
 
 input CreatePostInput {
