@@ -14,11 +14,11 @@ input CreateCommentInput {
 }
 
 type Query {
-  comments: [Comment]
+  comments: [Comment!]
   comment(id: String!): Comment
 }
 
 type Mutation {
-  createComment(createCommentInput: CreateCommentInput): Comment
+  createComment(createCommentInput: CreateCommentInput!): Comment
   deleteComment(id: String!): String
 }

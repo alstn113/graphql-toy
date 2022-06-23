@@ -22,6 +22,6 @@ model Comment {
   id String @id @default(uuid())
   text String
   createdAt DateTime @default(now())
-  post Post @relation(fields: [fk_post_id], references: [id])
+  post Post @relation(fields: [fk_post_id], references: [id], onDelete: Cascade)
   fk_post_id String 
 }

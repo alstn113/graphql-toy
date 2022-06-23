@@ -31,8 +31,10 @@ export class CommentService {
   }
 
   delete(postWhereUniqueInput: Prisma.PostWhereUniqueInput) {
-    return this.prisma.post.delete({
+    this.prisma.post.delete({
       where: postWhereUniqueInput,
     });
+
+    return `${postWhereUniqueInput.id} is deleted`;
   }
 }
