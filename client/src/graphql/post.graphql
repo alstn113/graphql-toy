@@ -8,6 +8,7 @@ query GetAllPosts {
       text
       fk_post_id
     }
+    createdAt
   }
 }
 
@@ -32,6 +33,6 @@ mutation createPost($createPostInput: CreatePostInput!) {
   }
 }
 
-mutation removePost($removePostId: String!) {
-  removePost(id: $removePostId)
+mutation deletePost($deletePostId: String!) {
+  deletePost(id: $deletePostId)
 }

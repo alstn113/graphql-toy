@@ -1,3 +1,4 @@
+
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -7,55 +8,49 @@
 /* tslint:disable */
 /* eslint-disable */
 export class CreateCommentInput {
-  text: string;
-  fk_post_id: string;
+    text: string;
+    fk_post_id: string;
 }
 
 export class CreatePostInput {
-  title: string;
-  body: string;
+    title: string;
+    body: string;
 }
 
 export class Comment {
-  id: string;
-  text: string;
-  fk_post_id: string;
-  post: Post;
-  createdAt?: Nullable<DateTime>;
+    id: string;
+    text: string;
+    fk_post_id: string;
+    post: Post;
+    createdAt?: Nullable<DateTime>;
 }
 
 export abstract class IQuery {
-  abstract comments(): Nullable<Comment[]> | Promise<Nullable<Comment[]>>;
+    abstract comments(): Nullable<Comment[]> | Promise<Nullable<Comment[]>>;
 
-  abstract comment(id: string): Nullable<Comment> | Promise<Nullable<Comment>>;
+    abstract comment(id: string): Nullable<Comment> | Promise<Nullable<Comment>>;
 
-  abstract posts(): Nullable<Post[]> | Promise<Nullable<Post[]>>;
+    abstract posts(): Nullable<Post[]> | Promise<Nullable<Post[]>>;
 
-  abstract post(id: string): Nullable<Post> | Promise<Nullable<Post>>;
+    abstract post(id: string): Nullable<Post> | Promise<Nullable<Post>>;
 }
 
 export abstract class IMutation {
-  abstract createComment(
-    createCommentInput: CreateCommentInput,
-  ): Nullable<Comment> | Promise<Nullable<Comment>>;
+    abstract createComment(createCommentInput: CreateCommentInput): Nullable<Comment> | Promise<Nullable<Comment>>;
 
-  abstract deleteComment(
-    id: string,
-  ): Nullable<string> | Promise<Nullable<string>>;
+    abstract deleteComment(id: string): Nullable<string> | Promise<Nullable<string>>;
 
-  abstract createPost(
-    createPostInput: CreatePostInput,
-  ): Nullable<Post> | Promise<Nullable<Post>>;
+    abstract createPost(createPostInput: CreatePostInput): Nullable<Post> | Promise<Nullable<Post>>;
 
-  abstract deletePost(id: string): Nullable<string> | Promise<Nullable<string>>;
+    abstract deletePost(id: string): Nullable<string> | Promise<Nullable<string>>;
 }
 
 export class Post {
-  id: string;
-  title: string;
-  body: string;
-  comments?: Nullable<Comment[]>;
-  createdAt?: Nullable<DateTime>;
+    id: string;
+    title: string;
+    body: string;
+    comments?: Nullable<Comment[]>;
+    createdAt?: Nullable<DateTime>;
 }
 
 export type DateTime = any;

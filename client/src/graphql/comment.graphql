@@ -12,13 +12,13 @@ query GetCommentById($id: String!) {
   }
 }
 
-mutation createComment($createCommentInput: CreateCommentInput) {
+mutation createComment($createCommentInput: CreateCommentInput!) {
   createComment(createCommentInput: $createCommentInput) {
     id
     text
   }
 }
 
-mutation removeComment($removeCommentId: String!) {
-  removeComment(id: $removeCommentId)
+mutation deleteComment($deleteCommentId: String!) {
+  deleteComment(id: $deleteCommentId)
 }

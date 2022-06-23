@@ -10,3 +10,6 @@
       emotion 설정
       yarn add @emotion/react @emotion/styled
       yarn add -D @emotion/babel-plugin
+
+      // date format
+      yarn add date-fns

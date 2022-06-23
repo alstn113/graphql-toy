@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import { GetAllPostsQuery, useGetAllPostsQuery } from '../generated/graphql';
 import graphqlRequestClient from '../lib/client/graphqlRequestClient';
+import formatDate from '../utils/formatDate';
 
 const Home: NextPage = () => {
   const { data, error, isLoading } = useGetAllPostsQuery<
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
             <Link href={`/detail/${post?.id}`}>{post?.id}</Link>
             <div>{post?.title}</div>
             <div>{post?.body}</div>
+            <div>{formatDate(post?.createdAt)}</div>
             <div>
               {post?.comments?.map(comment => {
                 return (
