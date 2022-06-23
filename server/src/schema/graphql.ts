@@ -38,11 +38,11 @@ export abstract class IQuery {
 export abstract class IMutation {
     abstract createComment(createCommentInput?: Nullable<CreateCommentInput>): Nullable<Comment> | Promise<Nullable<Comment>>;
 
-    abstract removeComment(id: string): Nullable<string> | Promise<Nullable<string>>;
+    abstract deleteComment(id: string): Nullable<string> | Promise<Nullable<string>>;
 
     abstract createPost(createPostInput?: Nullable<CreatePostInput>): Nullable<Post> | Promise<Nullable<Post>>;
 
-    abstract removePost(id: string): Nullable<string> | Promise<Nullable<string>>;
+    abstract deletePost(id: string): Nullable<string> | Promise<Nullable<string>>;
 }
 
 export class Post {

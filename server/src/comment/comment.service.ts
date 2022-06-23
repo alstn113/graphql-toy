@@ -16,8 +16,12 @@ export class CommentService {
     });
   }
 
-  findAllById(postId: string) {
-    return;
+  findAllByPostId(postId: string) {
+    return this.prisma.comment.findMany({
+      where: {
+        fk_post_id: postId,
+      },
+    });
   }
 
   create(createCommentInput: Prisma.CommentCreateInput) {
@@ -26,7 +30,9 @@ export class CommentService {
     });
   }
 
-  remove(id: string) {
-    return;
+  delete(postWhereUniqueInput: Prisma.PostWhereUniqueInput) {
+    return this.prisma.post.delete({
+      where: postWhereUniqueInput,
+    });
   }
 }

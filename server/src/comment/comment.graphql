@@ -20,5 +20,5 @@ type Query {
 
 type Mutation {
   createComment(createCommentInput: CreateCommentInput): Comment
-  removeComment(id: String!): String
+  deleteComment(id: String!): String
 }

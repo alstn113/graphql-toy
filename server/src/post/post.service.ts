@@ -22,7 +22,9 @@ export class PostService {
     });
   }
 
-  remove(id: string) {
-    return;
+  delete(postWhereUniqueInput: Prisma.PostWhereUniqueInput) {
+    return this.prisma.post.delete({
+      where: postWhereUniqueInput,
+    });
   }
 }

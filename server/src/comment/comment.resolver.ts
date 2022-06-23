@@ -22,8 +22,8 @@ export class CommentResolver {
     return this.commentService.create(args);
   }
 
-  @Mutation('removeComment')
-  removeComment(@Args('id') id: string) {
-    // return await this.commentService.remove(id);
+  @Mutation('deleteComment')
+  deleteComment(@Args('id') id: string) {
+    return this.commentService.delete({ id });
   }
 }
