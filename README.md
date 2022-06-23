@@ -1,6 +1,9 @@
 ## 기술스택
 
 1. nestjs
-2. nextjs
-3. graphql
-4. react-query
+2. prisma
+3. apollo-server-express
+
+4. nextjs
+5. graphql
+6. react-query
