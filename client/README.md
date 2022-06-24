@@ -7,9 +7,7 @@
       yarn @graphql-codegen/typescript-operations
       yarn @graphql-codegen/typescript-react-query
 
-      emotion 설정
-      yarn add @emotion/react @emotion/styled
-      yarn add -D @emotion/babel-plugin
+      yarn add @nextui-org/react
 
       // date format
       yarn add date-fns

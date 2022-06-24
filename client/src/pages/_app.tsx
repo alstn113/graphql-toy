@@ -6,10 +6,7 @@ import { useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
-// emotion
-import { ThemeProvider } from '@emotion/react';
-import theme from '../styles/theme';
-import GlobalStyle from '../styles/global-style';
+import { NextUIProvider } from '@nextui-org/react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -26,10 +23,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={true} />
       <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
+        <NextUIProvider>
           <Component {...pageProps} />
-        </ThemeProvider>
+        </NextUIProvider>
       </Hydrate>
     </QueryClientProvider>
   );
