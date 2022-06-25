@@ -11,3 +11,8 @@
 
       // date format
       yarn add date-fns
+
+      // recoil
+      best practice
+      https://wes-rast.medium.com/recoil-project-structure-best-practices-79e74a475caa
+      yarn add reocil

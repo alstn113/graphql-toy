@@ -7,7 +7,7 @@ import {
 } from '../../generated/graphql';
 import graphqlRequestClient from '../../lib/client/graphqlRequestClient';
 
-const Test: NextPage = () => {
+const Create: NextPage = () => {
   const queryClient = useQueryClient();
   const { mutate } = useCreatePostMutation<Error>(graphqlRequestClient, {
     onSuccess: (
@@ -30,4 +30,4 @@ const Test: NextPage = () => {
   );
 };
 
-export default Test;
+export default Create;

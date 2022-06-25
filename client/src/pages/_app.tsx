@@ -6,7 +6,14 @@ import { useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
+// nextui
 import { NextUIProvider } from '@nextui-org/react';
+
+// recoil
+import { RecoilRoot } from 'recoil';
+
+// components
+import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -20,14 +27,18 @@ function MyApp({ Component, pageProps }: AppProps) {
       }),
   );
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={true} />
-      <Hydrate state={pageProps.dehydratedState}>
-        <NextUIProvider>
-          <Component {...pageProps} />
-        </NextUIProvider>
-      </Hydrate>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={true} />
+        <Hydrate state={pageProps.dehydratedState}>
+          <NextUIProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </NextUIProvider>
+        </Hydrate>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 
