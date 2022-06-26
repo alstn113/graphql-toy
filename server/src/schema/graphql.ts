@@ -9,7 +9,7 @@
 /* eslint-disable */
 export class CreateCommentInput {
     text: string;
-    fk_post_id: string;
+    postId: string;
 }
 
 export class CreatePostInput {
@@ -20,9 +20,10 @@ export class CreatePostInput {
 export class Comment {
     id: string;
     text: string;
-    fk_post_id: string;
+    postId: string;
     post: Post;
     createdAt?: Nullable<DateTime>;
+    updatedAt?: Nullable<DateTime>;
 }
 
 export abstract class IQuery {
@@ -51,6 +52,7 @@ export class Post {
     body: string;
     comments?: Nullable<Comment[]>;
     createdAt?: Nullable<DateTime>;
+    updatedAt?: Nullable<DateTime>;
 }
 
 export type DateTime = any;

@@ -3,14 +3,15 @@ scalar DateTime
 type Comment {
   id: ID!
   text: String!
-  fk_post_id: String!
+  postId: String!
   post: Post!
   createdAt: DateTime
+  updatedAt: DateTime
 }
 
 input CreateCommentInput {
   text: String!
-  fk_post_id: String!
+  postId: String!
 }
 
 type Query {

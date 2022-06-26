@@ -19,7 +19,7 @@ export class CommentService {
   findAllByPostId(postId: string) {
     return this.prisma.comment.findMany({
       where: {
-        fk_post_id: postId,
+        postId,
       },
     });
   }

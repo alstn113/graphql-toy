@@ -6,6 +6,7 @@ type Post {
   body: String!
   comments: [Comment!]
   createdAt: DateTime
+  updatedAt: DateTime
 }
 
 input CreatePostInput {
