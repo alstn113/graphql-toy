@@ -1,9 +1,11 @@
-## 기술스택
+# WAF를 만들기 위한 실험실
 
-1. nestjs
-2. prisma
-3. apollo-server-express
+      Server
+      1. nestjs
+      2. prisma
+      3. apollo-server-express
 
-4. nextjs
-5. graphql
-6. react-query
+      Client
+      1. nextjs
+      2. graphql
+      3. react-query

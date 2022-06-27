@@ -7,6 +7,8 @@ import configuration from './config/configuration';
 import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { GraphQLDateTime } from 'graphql-iso-date';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { GraphQLDateTime } from 'graphql-iso-date';
       resolvers: { DateTime: GraphQLDateTime },
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
+    AuthModule,
+    UserModule,
     PostModule,
     CommentModule,
   ],

@@ -1,0 +1,10 @@
+scalar DateTime
+
+type User {
+  id: ID!
+  socialId: String!
+  username: String!
+  provider: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
