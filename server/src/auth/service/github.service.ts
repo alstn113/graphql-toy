@@ -23,9 +23,15 @@ export class GithubService {
         GITHUB_SECRET,
       );
       if (!accessToken) throw new HttpException('액서스 토큰 받기 실패', 400);
+
       const userInfo = await this.getGithubUserInfo(accessToken);
       const userId = await this.getGithubUserId(userInfo);
       if (!userId) throw new HttpException('로그인 실패', 400);
+
+      const access_token = await this.authServie.getAccessToken(userId);
+      const refresh_token = await this.authServie.getRefreshToken(userId);
+      await this.authServie.updateRtHash(userId, refresh_token);
+      this.authServie.setTokenCookie(res, { access_token, refresh_token });
     } catch (e) {
       throw new HttpException(e.message, 500);
     }
@@ -62,9 +68,9 @@ export class GithubService {
   }
 
   async getGithubUserId({ node_id, login }) {
-    const exUser = await this.prisma.user.findUnique({
+    const exUser = await this.prisma.user.findFirst({
       where: {
-        id: node_id,
+        socialId: node_id,
       },
     });
     if (exUser) return exUser.id;
@@ -76,6 +82,8 @@ export class GithubService {
         provider: 'github',
       },
     };
-    return await this.prisma.user.create(newUser);
+
+    const user = await this.prisma.user.create(newUser);
+    return user.id;
   }
 }
