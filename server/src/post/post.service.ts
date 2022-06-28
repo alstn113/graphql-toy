@@ -22,8 +22,8 @@ export class PostService {
     });
   }
 
-  delete(postWhereUniqueInput: Prisma.PostWhereUniqueInput) {
-    this.prisma.post.delete({
+  async delete(postWhereUniqueInput: Prisma.PostWhereUniqueInput) {
+    await this.prisma.post.delete({
       where: postWhereUniqueInput,
     });
     return `${postWhereUniqueInput.id} is deleted`;

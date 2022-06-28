@@ -1,0 +1,81 @@
+import { HttpException, Injectable } from '@nestjs/common';
+import { PrismaService } from 'prisma/prisma.service';
+import { Response } from 'express';
+import { AuthService } from './auth.service';
+import { ConfigService } from '@nestjs/config';
+import axios from 'axios';
+
+@Injectable()
+export class GithubService {
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly authServie: AuthService,
+    private readonly configService: ConfigService,
+  ) {}
+
+  async githubCallback(res: Response, code: string) {
+    try {
+      const GITHUB_ID = this.configService.get('auth.github.id');
+      const GITHUB_SECRET = this.configService.get('auth.github.secret');
+      const accessToken = await this.getGithubAccessToken(
+        code,
+        GITHUB_ID,
+        GITHUB_SECRET,
+      );
+      if (!accessToken) throw new HttpException('액서스 토큰 받기 실패', 400);
+      const userInfo = await this.getGithubUserInfo(accessToken);
+      const userId = await this.getGithubUserId(userInfo);
+      if (!userId) throw new HttpException('로그인 실패', 400);
+    } catch (e) {
+      throw new HttpException(e.message, 500);
+    }
+  }
+
+  async getGithubAccessToken(
+    code: string,
+    clientId: string,
+    clientSecret: string,
+  ) {
+    const response = await axios.post(
+      `https://github.com/login/oauth/access_token`,
+      {
+        client_id: clientId,
+        client_secret: clientSecret,
+        code,
+      },
+      {
+        headers: {
+          accept: 'application/json',
+        },
+      },
+    );
+    return response.data.access_token;
+  }
+
+  async getGithubUserInfo(accessToken: string) {
+    const response = await axios.get('https://api.github.com/user', {
+      headers: {
+        Authorization: `token ${accessToken}`,
+      },
+    });
+    return response.data;
+  }
+
+  async getGithubUserId({ node_id, login }) {
+    const exUser = await this.prisma.user.findUnique({
+      where: {
+        id: node_id,
+      },
+    });
+    if (exUser) return exUser.id;
+
+    const newUser = {
+      data: {
+        socialId: node_id,
+        username: login,
+        provider: 'github',
+      },
+    };
+    return await this.prisma.user.create(newUser);
+  }
+}

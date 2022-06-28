@@ -1,5 +1,5 @@
 import { Resolver } from '@nestjs/graphql';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
 
 @Resolver('Auth')
 export class AuthResolver {

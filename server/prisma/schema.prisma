@@ -14,7 +14,8 @@ model User {
   id String @id @default(uuid())
   socialId String
   username String
-  provider String 
+  provider String
+  hashedRt String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
 }
@@ -31,7 +32,7 @@ model Post {
 model Comment {
   id String @id @default(uuid())
   text String
-  postId String 
+  postId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)

@@ -60,6 +60,7 @@ export class User {
     socialId: string;
     username: string;
     provider: string;
+    hashedRt?: Nullable<string>;
     createdAt?: Nullable<DateTime>;
     updatedAt?: Nullable<DateTime>;
 }

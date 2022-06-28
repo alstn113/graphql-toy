@@ -9,6 +9,7 @@ import { CommentModule } from './comment/comment.module';
 import { GraphQLDateTime } from 'graphql-iso-date';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserModule } from './user/user.module';
       isGlobal: true,
       load: [configuration],
     }),
+    JwtModule.register({}),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
